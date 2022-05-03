@@ -1,0 +1,11 @@
+{
+    "name": "webshippy/phpproject",
+    "description": "webshippy",
+    "require": {
+        "php": ">=8.1",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {"Webshippy\\": "src/"}
+    }
+}
