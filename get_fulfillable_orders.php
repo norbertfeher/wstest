@@ -13,31 +13,9 @@ $Controller = new Controller($argc, $argv, $fileName);
 $Controller->run();
 
 $stock = json_decode($argv[1]);
-$orders = [];
-$ordersH = [];
-
-$row = 1;
-if (($handle = fopen('orders.csv', 'r')) !== false) {
-    while (($data = fgetcsv($handle)) !== false) {
-        if ($row == 1) {
-            $ordersH = $data;
-        } else {
-            $o = [];
-            for ($i = 0; $i < count($ordersH); $i++) {
-                $o[$ordersH[$i]] = $data[$i];
-            }
-            $orders[] = $o;
-        }
-        $row++;
-    }
-    fclose($handle);
-}
 
 
-usort($orders, function ($a, $b) {
-    $pc = -1 * ($a['priority'] <=> $b['priority']);
-    return $pc == 0 ? $a['created_at'] <=> $b['created_at'] : $pc;
-});
+
 
 foreach ($ordersH as $h) {
     echo str_pad($h, 20);

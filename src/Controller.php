@@ -2,6 +2,7 @@
 
 namespace Webshippy;
 use Webshippy\InputValidation;
+use Webshippy\DataFromFile;
 
 class Controller
 {
@@ -21,10 +22,20 @@ class Controller
         else return false;
     }
 
+    private function loadDataFromFile(): DataFromFile
+    {
+        $LoadDataFromFile = new DataFromFile();
+        $LoadDataFromFile->loadDataFromFile( $this->fileName);
+        // we need the orders by order of priority and time
+        $LoadDataFromFile->sortData();
+        return $LoadDataFromFile;
+    }
+
 
     // start point of the app
     public function run()
     {
         $this->inputValidation();
+        $DataFromFile = $this->loadDataFromFile();
     }
 }
