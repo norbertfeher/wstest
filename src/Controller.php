@@ -3,6 +3,8 @@
 namespace Webshippy;
 use Webshippy\InputValidation;
 use Webshippy\DataFromFile;
+use Webshippy\ProcessData;
+use Webshippy\DisplayData;
 
 class Controller
 {
@@ -12,7 +14,7 @@ class Controller
 
     }
 
-    // validate the input
+    // validate the user and file input
     private function inputValidation(): bool
     {
         $InputValidation = new InputValidation();
@@ -22,6 +24,7 @@ class Controller
         else return false;
     }
 
+    // load and sort the order data from csv
     private function loadDataFromFile(): DataFromFile
     {
         $LoadDataFromFile = new DataFromFile();
@@ -31,11 +34,24 @@ class Controller
         return $LoadDataFromFile;
     }
 
+    // process and filter orders
+    private function processData( DataFromFile $dataFromFile ): ProcessData
+    {
+        $ProcessData = new ProcessData();
+        $ProcessData->getArgumentData($this->argv);
+        $ProcessData->prepareData( $dataFromFile->getOrders(), $dataFromFile->getOrdersHeader() );
+        return $ProcessData;
+    }
+
 
     // start point of the app
     public function run()
     {
         $this->inputValidation();
         $DataFromFile = $this->loadDataFromFile();
+        $ProcessData = $this->processData( $DataFromFile );
+        $DisplayData = new DisplayData();
+        $DisplayData->display( $ProcessData, $DataFromFile->getOrdersHeader() );
+
     }
 }
