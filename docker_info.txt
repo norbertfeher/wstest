@@ -1,0 +1,8 @@
+#build and run docker
+docker build -t webshippyphp .
+docker run -ti webshippyphp bash
+
+#commands
+php get_fulfillable_orders.php '{"1":8,"2":4,"3":5}'
+php get_fulfillable_orders.php '{"1":2,"2":3,"3":1}'
+vendor/bin/phpunit
