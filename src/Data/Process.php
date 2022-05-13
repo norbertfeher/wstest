@@ -6,24 +6,20 @@
  * Time: 15:51
  */
 
-namespace Webshippy;
+namespace Webshippy\Data;
 
 
-class ProcessData
+class Process
 {
     // stock data
     private $stock;
     // store the processed and filtered data
     private $processedData = [];
 
-    // get the stock data, transform to array and store
-    public function getArgumentData(array $argv)
+    // set the stock data, transform to array and store
+    public function setArgument(array $argv)
     {
         $data = json_decode($argv[1]);
-        if( !is_object($data) )
-        {
-            throw new \Exception('Invalid stock JSON data');
-        }
         $this->stock = $data;
     }
 

@@ -1,15 +1,16 @@
 <?php
 
-namespace Webshippy;
+namespace Webshippy\Data;
 use Webshippy\Exceptions\InputFileException;
 
-class DataFromFile
+class File
 {
+
     public function __construct(private array $orders = [], private array $ordersHeader = []) {
 
     }
 
-    public function loadDataFromFile(string $FileName): void
+    public function load(string $FileName)
     {
         $row = 1;
         if (($handle = fopen($FileName, 'r')) !== false) {
@@ -32,14 +33,6 @@ class DataFromFile
         }
     }
 
-    public function sortData(): void
-    {
-        usort($this->orders, function ($a, $b) {
-            $pc = -1 * ($a['priority'] <=> $b['priority']);
-            return $pc == 0 ? $a['created_at'] <=> $b['created_at'] : $pc;
-        });
-    }
-
     public function getOrders(): array
     {
         return $this->orders;
@@ -49,4 +42,10 @@ class DataFromFile
     {
         return $this->ordersHeader;
     }
+
+    public function setOrders(array $orders): void
+    {
+        $this->orders = $orders;
+    }
+
 }

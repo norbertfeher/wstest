@@ -4,7 +4,7 @@ namespace Webshippy;
 
 require __DIR__.'/vendor/autoload.php';
 
-use Webshippy\Controller;
+use Webshippy\Controllers\Controller;
 
 $fileName = 'orders.csv';
 

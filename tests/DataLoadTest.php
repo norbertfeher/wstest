@@ -9,6 +9,7 @@
 namespace Webshippy;
 
 use PHPUnit\Framework\TestCase;
+use Webshippy\Data\File;
 
 
 class DataLoadTest extends TestCase
@@ -16,29 +17,11 @@ class DataLoadTest extends TestCase
 
     public function testGetHeaders()
     {
-        $DataFromFile = new DataFromFile();
-        $DataFromFile->loadDataFromFile('tests/orders.csv');
-        $ordersHeader = $DataFromFile->getOrdersHeader();
+        $File = new File();
+        $File->load('tests/orders.csv');
+        $ordersHeader = $File->getOrdersHeader();
         $validArray = [ 'product_id','quantity','priority','created_at' ];
         $this->assertEquals( $validArray, $ordersHeader );
-    }
-
-
-    public function testGetOrders()
-    {
-        $DataFromFile = new DataFromFile();
-
-        $DataFromFile->loadDataFromFile('tests/orders.csv');
-        $orders = $DataFromFile->getOrders();
-        // only csv decoded data
-        $this->assertEquals( md5(serialize($orders)), '1c12ce53e9646e44166131439b0fd30c' );
-
-
-        $DataFromFile->sortData();
-        $orders = $DataFromFile->getOrders();
-        // sorted data
-        $this->assertEquals( md5(serialize($orders)), '9c4666f2b0ca50eb2df391e5ec23f3a7' );
-
     }
 
 }

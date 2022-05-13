@@ -2,7 +2,7 @@
     "name": "webshippy/phpproject",
     "description": "webshippy",
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.0",
         "phpunit/phpunit": "^9.0"
     },
     "autoload": {
