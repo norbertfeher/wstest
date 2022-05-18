@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 use Webshippy\Data\File;
 
 
-class DataLoadTest extends TestCase
+class HeaderTest extends TestCase
 {
 
     public function testGetHeaders()

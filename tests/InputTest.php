@@ -11,37 +11,30 @@ use Webshippy\Exceptions\InputFileException;
 
 class InputTest extends TestCase
 {
+    private $input;
+    public function setUp(): void
+    {
+        $this->input = new Input();
+    }
 
     public function testInputNumberException()
     {
-        $obj = new Input();
 
-        try {
-            $obj->checkInputNumbers(3);
-        } catch (InputsNumberException $exception) {
-            $this->assertInstanceOf(InputsNumberException::class, $exception);
-        }
-
+        $this->expectException( InputsNumberException::class );
+        $this->input->checkInputNumbers(3);
     }
 
     public function testInputJsonException()
     {
-        $obj = new Input();
-        try {
-            $obj->checkInputIsJson(['', '']);
-        } catch (InputJsonException $exception) {
-            $this->assertInstanceOf(InputJsonException::class, $exception);
-        }
+        $this->expectException( InputJsonException::class );
+        $this->input->checkInputIsJson(['', '']);
     }
 
     public function testInputFileException()
     {
-        $obj = new Input();
-        try {
-            $obj->checkInputFile('');
-        } catch (InputFileException $exception) {
-            $this->assertInstanceOf(InputFileException::class, $exception);
-        }
+        $this->expectException( InputFileException::class );
+        $this->input->checkInputFile('');
+
     }
 
 
